@@ -70,6 +70,7 @@ func getAutoDefaultExposeRule(c *client.Client) (string, error) {
 
 func getAutoDefaultDomain(c *client.Client) (string, error) {
 	nodes, err := c.Nodes().List(api.ListOptions{})
+	glog.Infof("nodes info %s , ", nodes)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to find any nodes")
 	}
@@ -112,7 +113,8 @@ func getAutoDefaultDomain(c *client.Client) (string, error) {
 			}
 		}
 	}
-	return "", errors.New("no known automatic ways to get an external ip to use with nip.  Please configure exposecontroller configmap manually see https://github.com/jenkins-x/exposecontroller#configuration")
+	//return "", errors.New("no known automatic ways to get an external ip to use with nip.  Please configure exposecontroller configmap manually see https://github.com/jenkins-x/exposecontroller#configuration")
+	return "192.168.1.105" + domainExt, nil
 }
 
 // copied from k8s.io/kubernetes/pkg/master/master.go
